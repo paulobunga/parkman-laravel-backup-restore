@@ -24,6 +24,10 @@ class ParkmanServiceProvider extends ServiceProvider
                 __DIR__.'/../config/config.php' => config_path('parkman.php'),
             ], 'config');
 
+            $this->publishes([
+                __DIR__.'/../config/backup.php' => config_path('backup.php'),
+            ], 'config');
+
             // Publishing the views.
             /*$this->publishes([
                 __DIR__.'/../resources/views' => resource_path('views/vendor/parkman'),
@@ -40,7 +44,10 @@ class ParkmanServiceProvider extends ServiceProvider
             ], 'lang');*/
 
             // Registering package commands.
-            // $this->commands([]);
+            $this->commands([
+                \Paulobunga\Parkman\Commands\BackupCommand::class,
+                \Paulobunga\Parkman\Commands\RestoreCommand::class,
+            ]);
         }
     }
 
@@ -56,5 +63,9 @@ class ParkmanServiceProvider extends ServiceProvider
         $this->app->singleton('parkman', function () {
             return new Parkman;
         });
+
+        $this->mergeConfigFrom(__DIR__.'/../config/filesystems.php', 'filesystems');
+
+        $this->app->register(\Spatie\Backup\BackupServiceProvider::class);
     }
 }

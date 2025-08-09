@@ -17,10 +17,13 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
-        "illuminate/support": "^8.0"
+        "google/apiclient": "^2.12.1",
+        "illuminate/support": "^9.0",
+        "masbug/flysystem-google-drive-ext": "^2.2",
+        "spatie/laravel-backup": "^8.1"
     },
     "require-dev": {
-        "orchestra/testbench": "^6.0",
+        "orchestra/testbench": "^7.0",
         "phpunit/phpunit": "^9.0"
     },
     "autoload": {
